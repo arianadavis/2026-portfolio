@@ -30,7 +30,7 @@ function CarouselCard({ project, index }: { project: Project; index: number }) {
       initial={{ opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.06 }}
-      className="shrink-0 w-[520px] snap-center"
+      className="shrink-0 w-[85vw] max-w-[520px] snap-center"
     >
       <Link
         href={`/projects/${project.id}`}
@@ -177,7 +177,7 @@ export default function ProjectCarousel({ projects }: ProjectCarouselProps) {
   return (
     <section className="relative">
       {/* Section header */}
-      <div className="px-8 mb-8 flex items-center justify-between max-w-[1200px] mx-auto">
+      <div className="px-5 sm:px-8 mb-8 flex items-center justify-between max-w-[1200px] mx-auto">
         <h2 className="text-[11px] tracking-[0.12em] uppercase text-muted-foreground font-normal">
           Selected Work
         </h2>
@@ -193,7 +193,7 @@ export default function ProjectCarousel({ projects }: ProjectCarouselProps) {
 
           <div
             ref={scrollRef}
-            className="flex gap-5 overflow-x-auto pb-6 px-8"
+            className="flex gap-5 overflow-x-auto pb-6 px-5 sm:px-8"
             style={{
               scrollSnapType: "x mandatory",
               scrollbarWidth: "none",
@@ -209,7 +209,7 @@ export default function ProjectCarousel({ projects }: ProjectCarouselProps) {
           </div>
         </div>
       ) : (
-        <div className="px-8 grid grid-cols-2 md:grid-cols-3 gap-6 max-w-[1200px] mx-auto">
+        <div className="px-5 sm:px-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-[1200px] mx-auto">
           {projects.map((project, i) => (
             <GridCard key={project.id} project={project} index={i} />
           ))}

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
+import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
@@ -15,6 +16,7 @@ const navLinks = [
 export default function Navbar() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -22,50 +24,100 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Close the mobile menu whenever the route changes
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [pathname]);
+
   return (
     <nav
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 h-14 transition-all duration-300",
-        scrolled
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+        scrolled || menuOpen
           ? "bg-background/95 backdrop-blur-sm border-b border-border"
           : "bg-transparent"
       )}
     >
-      {/* Logo */}
-      <Link
-        href="/"
-        className="text-[13px] font-bold tracking-[0.06em] uppercase text-foreground no-underline"
-      >
-        Ariana Davis
-      </Link>
+      <div className="flex items-center justify-between px-5 sm:px-8 h-14">
+        {/* Logo */}
+        <Link
+          href="/"
+          className="text-[13px] font-bold tracking-[0.06em] uppercase text-foreground no-underline"
+        >
+          Ariana Davis
+        </Link>
 
-      {/* Center nav */}
-      <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-7">
-        {navLinks.map((link) => (
-          <Link
-            key={link.href}
-            href={link.href}
-            className={cn(
-              "text-[14px] no-underline transition-colors duration-150",
-              pathname === link.href
-                ? "text-foreground font-medium"
-                : "text-muted-foreground hover:text-foreground"
-            )}
+        {/* Center nav — desktop only */}
+        <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center gap-7">
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={cn(
+                "text-[14px] no-underline transition-colors duration-150",
+                pathname === link.href
+                  ? "text-foreground font-medium"
+                  : "text-muted-foreground hover:text-foreground"
+              )}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </div>
+
+        {/* Right cluster */}
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
+
+          {/* CTA — hidden on the smallest screens */}
+          <a
+            href="mailto:hello@arianadavis.com"
+            className="hidden sm:inline-flex items-center h-8 px-4 rounded-full bg-foreground text-background text-[13px] font-medium no-underline hover:opacity-80 transition-opacity duration-150"
           >
-            {link.label}
-          </Link>
-        ))}
+            Contact me
+          </a>
+
+          {/* Hamburger — mobile only */}
+          <button
+            onClick={() => setMenuOpen((o) => !o)}
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={menuOpen}
+            className="md:hidden w-8 h-8 flex items-center justify-center rounded-full text-foreground hover:bg-secondary transition-colors duration-150"
+          >
+            {menuOpen ? <X size={18} /> : <Menu size={18} />}
+          </button>
+        </div>
       </div>
 
-      {/* Right: theme toggle + CTA */}
-      <div className="flex items-center gap-2">
-        <ThemeToggle />
-        <a
-          href="mailto:hello@arianadavis.com"
-          className="inline-flex items-center h-8 px-4 rounded-full bg-foreground text-background text-[13px] font-medium no-underline hover:opacity-80 transition-opacity duration-150"
-        >
-          Contact me
-        </a>
+      {/* Mobile dropdown */}
+      <div
+        className={cn(
+          "md:hidden overflow-hidden transition-[max-height,opacity] duration-300 ease-out",
+          menuOpen ? "max-h-72 opacity-100" : "max-h-0 opacity-0"
+        )}
+      >
+        <div className="px-5 pb-4 pt-1 flex flex-col">
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={cn(
+                "py-3 border-b border-border text-[15px] no-underline transition-colors duration-150",
+                pathname === link.href
+                  ? "text-foreground font-medium"
+                  : "text-muted-foreground hover:text-foreground"
+              )}
+            >
+              {link.label}
+            </Link>
+          ))}
+          <a
+            href="mailto:hello@arianadavis.com"
+            className="mt-4 inline-flex items-center justify-center h-10 px-4 rounded-full bg-foreground text-background text-[14px] font-medium no-underline"
+          >
+            Contact me
+          </a>
+        </div>
       </div>
     </nav>
   );

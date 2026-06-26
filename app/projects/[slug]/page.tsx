@@ -19,7 +19,7 @@ export default function ProjectDetailPage({ params }: PageProps) {
   if (!project) notFound();
 
   return (
-    <div className="pt-28 px-8 pb-24 max-w-[1200px] mx-auto min-h-screen">
+    <div className="pt-28 px-5 sm:px-8 pb-24 max-w-[1200px] mx-auto min-h-screen">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

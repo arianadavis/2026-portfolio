@@ -8,7 +8,7 @@ import { socials } from "@/lib/data";
 
 export default function ContactPage() {
   return (
-    <div className="pt-28 px-8 pb-24 max-w-[1200px] mx-auto min-h-[calc(100vh-56px)]">
+    <div className="pt-28 px-5 sm:px-8 pb-24 max-w-[1200px] mx-auto min-h-[calc(100vh-56px)]">
       <motion.p
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

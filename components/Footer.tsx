@@ -6,7 +6,7 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-border px-8 py-10 mt-24">
+    <footer className="border-t border-border px-5 sm:px-8 py-10 mt-24">
       <div className="max-w-[1200px] mx-auto flex justify-between items-center flex-wrap gap-6">
         <div className="flex items-center gap-1.5 flex-wrap">
           {socials.map((social) => {

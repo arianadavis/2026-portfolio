@@ -8,7 +8,7 @@ import ProjectCarousel from "@/components/ProjectCarousel";
 export default function ProjectsPage() {
   return (
     <div className="pt-28 pb-24">
-      <div className="px-8 max-w-[1200px] mx-auto mb-12">
+      <div className="px-5 sm:px-8 max-w-[1200px] mx-auto mb-12">
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

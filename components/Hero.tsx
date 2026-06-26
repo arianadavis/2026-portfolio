@@ -5,7 +5,7 @@ import { specialties } from "@/lib/data";
 
 export default function Hero() {
   return (
-    <section className="pt-32 pb-0 px-8 max-w-[1200px] mx-auto">
+    <section className="pt-32 pb-0 px-5 sm:px-8 max-w-[1200px] mx-auto">
       {/* Big mixed-weight headline */}
       <motion.h1
         initial={{ opacity: 0, y: 32 }}

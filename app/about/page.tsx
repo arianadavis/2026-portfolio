@@ -7,7 +7,7 @@ import { experience, socials } from "@/lib/data";
 
 export default function AboutPage() {
   return (
-    <div className="pt-28 px-8 pb-24 max-w-[1200px] mx-auto">
+    <div className="pt-28 px-5 sm:px-8 pb-24 max-w-[1200px] mx-auto">
       {/* Label */}
       <motion.p
         initial={{ opacity: 0 }}
