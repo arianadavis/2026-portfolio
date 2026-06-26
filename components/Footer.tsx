@@ -30,7 +30,7 @@ export default function Footer() {
         </div>
 
         <span className="text-[12px] text-muted-foreground">
-          Ariana Davis ©{year}
+          © {year} Ariana Davis. All rights reserved
         </span>
       </div>
     </footer>
