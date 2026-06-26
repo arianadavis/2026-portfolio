@@ -1,23 +1,11 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-import { SiX, SiDribbble, SiFigma } from "react-icons/si";
-import { FaLinkedin } from "react-icons/fa6";
 import { X } from "lucide-react";
-import { socials } from "@/lib/data";
+import { primarySocials } from "@/lib/data";
 import { cn } from "@/lib/utils";
 
 const CAL_URL = "https://cal.com/arianadavis/coffee-chat-30";
-
-// Pull the real URLs from the socials data so they stay in one place.
-const urlFor = (name: string) => socials.find((s) => s.name === name)?.url ?? "#";
-
-const menuSocials = [
-  { name: "X", url: urlFor("X"), Icon: SiX },
-  { name: "Dribbble", url: urlFor("Dribbble"), Icon: SiDribbble },
-  { name: "LinkedIn", url: urlFor("LinkedIn"), Icon: FaLinkedin },
-  { name: "Figma", url: urlFor("Figma"), Icon: SiFigma },
-];
 
 export default function FloatingMenu() {
   const [visible, setVisible] = useState(false);
@@ -68,19 +56,23 @@ export default function FloatingMenu() {
         )}
       >
         <div className="flex items-center gap-1 rounded-full bg-[#0a0a0a] border border-white/10 p-1.5 pl-3 shadow-[0_8px_30px_rgba(0,0,0,0.35)]">
-          {menuSocials.map(({ name, url, Icon }) => (
-            <a
-              key={name}
-              href={url}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={name}
-              title={name}
-              className="w-9 h-9 flex items-center justify-center rounded-full text-white/70 hover:text-white hover:bg-white/10 transition-colors duration-150"
-            >
-              <Icon size={16} />
-            </a>
-          ))}
+          {primarySocials.map((social) => {
+            const Icon = social.icon;
+            const isMailto = social.url.startsWith("mailto");
+            return (
+              <a
+                key={social.name}
+                href={social.url}
+                target={isMailto ? undefined : "_blank"}
+                rel="noopener noreferrer"
+                aria-label={social.name}
+                title={social.name}
+                className="w-9 h-9 flex items-center justify-center rounded-full text-white/70 hover:text-white hover:bg-white/10 transition-colors duration-150"
+              >
+                <Icon size={16} />
+              </a>
+            );
+          })}
 
           {/* Divider */}
           <span className="w-px h-5 bg-white/15 mx-1.5" />

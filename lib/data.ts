@@ -1,5 +1,5 @@
 import type { ComponentType } from "react";
-import { SiInstagram, SiFigma, SiDribbble, SiX } from "react-icons/si";
+import { SiInstagram, SiFigma, SiDribbble, SiX, SiGithub } from "react-icons/si";
 import { FaLinkedinIn } from "react-icons/fa6";
 import { Mail } from "lucide-react";
 
@@ -147,7 +147,13 @@ export const socials: {
   { name: 'Dribbble', handle: 'arianadavis', url: 'https://dribbble.com/arianadavis', icon: SiDribbble },
   { name: 'X', handle: '@yourmobilegeek', url: 'https://x.com/yourmobilegeek', icon: SiX },
   { name: 'Email', handle: 'hello@arianadavis.com', url: 'mailto:hello@arianadavis.com', icon: Mail },
+  { name: 'GitHub', handle: 'arianadavis', url: 'https://github.com/arianadavis', icon: SiGithub },
 ];
+
+// Curated, ordered subset shown in the footer and floating menu.
+export const primarySocials = ["LinkedIn", "Figma", "X", "Email", "GitHub"]
+  .map((name) => socials.find((s) => s.name === name))
+  .filter((s): s is (typeof socials)[number] => Boolean(s));
 
 export const specialties = [
   { label: 'Product Design', color: '#3B6FD4' },
