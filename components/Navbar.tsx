@@ -72,7 +72,7 @@ export default function Navbar() {
           {/* CTA — hidden on the smallest screens */}
           <a
             href="mailto:hello@arianadavis.com"
-            className="hidden sm:inline-flex items-center h-8 px-4 rounded-full bg-foreground text-background text-[13px] font-medium no-underline hover:opacity-80 transition-opacity duration-150"
+            className="hidden sm:inline-flex items-center h-7 px-3.5 rounded-full bg-foreground text-background text-[12px] font-medium no-underline hover:opacity-80 transition-opacity duration-150"
           >
             Say Hi 👋
           </a>
