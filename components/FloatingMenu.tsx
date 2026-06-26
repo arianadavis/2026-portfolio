@@ -109,7 +109,7 @@ export default function FloatingMenu() {
           />
 
           {/* Modal card */}
-          <div className="relative w-full max-w-3xl h-[82vh] bg-white rounded-2xl overflow-hidden shadow-2xl flex flex-col">
+          <div className="relative w-full max-w-6xl h-[80vh] max-h-[720px] bg-white rounded-2xl overflow-hidden shadow-2xl flex flex-col">
             <div className="flex items-center justify-between px-4 h-12 border-b border-black/10 shrink-0">
               <span className="text-[13px] font-medium text-black">
                 Book a call
