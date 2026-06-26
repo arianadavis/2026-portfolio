@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const navLinks = [
   { href: "/", label: "Works" },
@@ -56,13 +57,16 @@ export default function Navbar() {
         ))}
       </div>
 
-      {/* Right CTA */}
-      <a
-        href="mailto:hello@arianadavis.com"
-        className="inline-flex items-center h-8 px-4 rounded-full bg-foreground text-background text-[13px] font-medium no-underline hover:opacity-80 transition-opacity duration-150"
-      >
-        Contact me
-      </a>
+      {/* Right: theme toggle + CTA */}
+      <div className="flex items-center gap-2">
+        <ThemeToggle />
+        <a
+          href="mailto:hello@arianadavis.com"
+          className="inline-flex items-center h-8 px-4 rounded-full bg-foreground text-background text-[13px] font-medium no-underline hover:opacity-80 transition-opacity duration-150"
+        >
+          Contact me
+        </a>
+      </div>
     </nav>
   );
 }

@@ -85,6 +85,36 @@
   --sidebar-ring: #0a0a0a;
 }
 
+/* ─── Dark theme ────────────────────────────────────────────────────────────── */
+.dark {
+  --background: #0f0f0f;
+  --foreground: #edebe5;
+  --card: #161616;
+  --card-foreground: #edebe5;
+  --popover: #161616;
+  --popover-foreground: #edebe5;
+  --primary: #edebe5;
+  --primary-foreground: #0f0f0f;
+  --secondary: #1e1e1e;
+  --secondary-foreground: #edebe5;
+  --muted: #1a1a1a;
+  --muted-foreground: #666666;
+  --accent: #1e1e1e;
+  --accent-foreground: #edebe5;
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: #222222;
+  --input: #222222;
+  --ring: #edebe5;
+  --sidebar: #161616;
+  --sidebar-foreground: #edebe5;
+  --sidebar-primary: #edebe5;
+  --sidebar-primary-foreground: #0f0f0f;
+  --sidebar-accent: #1e1e1e;
+  --sidebar-accent-foreground: #edebe5;
+  --sidebar-border: #222222;
+  --sidebar-ring: #edebe5;
+}
+
 /* ─── Base layer ────────────────────────────────────────────────────────────── */
 @layer base {
   * {
@@ -103,11 +133,11 @@
   }
 
   ::selection {
-    background-color: #0a0a0a;
-    color: #ffffff;
+    background-color: var(--foreground);
+    color: var(--background);
   }
 
   ::-webkit-scrollbar { width: 4px; }
-  ::-webkit-scrollbar-track { background: #f6f6f6; }
-  ::-webkit-scrollbar-thumb { background: #d0d0d0; border-radius: 2px; }
+  ::-webkit-scrollbar-track { background: var(--muted); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
 }
