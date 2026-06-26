@@ -69,20 +69,24 @@ export default function ContactPage() {
           <div className="flex flex-col">
             {socials
               .filter((s) => !s.url.startsWith("mailto"))
-              .map((social) => (
-                <a
-                  key={social.name}
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex justify-between items-center py-3.5 border-b border-border text-muted-foreground hover:text-foreground no-underline text-[13px] transition-colors duration-150"
-                >
-                  <span className="text-[11px] tracking-[0.08em] uppercase">
-                    {social.name}
-                  </span>
-                  <span>{social.handle} →</span>
-                </a>
-              ))}
+              .map((social) => {
+                const Icon = social.icon;
+                return (
+                  <a
+                    key={social.name}
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex justify-between items-center py-3.5 border-b border-border text-muted-foreground hover:text-foreground no-underline text-[13px] transition-colors duration-150"
+                  >
+                    <span className="flex items-center gap-2.5">
+                      <Icon size={15} aria-label={social.name} />
+                      <span className="sr-only">{social.name}</span>
+                    </span>
+                    <span>{social.handle} →</span>
+                  </a>
+                );
+              })}
           </div>
         </motion.div>
       </div>

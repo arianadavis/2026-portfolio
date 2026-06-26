@@ -45,20 +45,24 @@ export default function AboutPage() {
 
           {/* Social rows */}
           <div className="flex flex-col">
-            {socials.map((s) => (
-              <a
-                key={s.name}
-                href={s.url}
-                target={s.url.startsWith("mailto") ? undefined : "_blank"}
-                rel="noopener noreferrer"
-                className="flex justify-between items-center py-3 border-b border-border text-muted-foreground hover:text-foreground no-underline transition-colors duration-150 text-[13px]"
-              >
-                <span className="text-[11px] tracking-[0.08em] uppercase text-muted-foreground">
-                  {s.name}
-                </span>
-                <span>{s.handle}</span>
-              </a>
-            ))}
+            {socials.map((s) => {
+              const Icon = s.icon;
+              return (
+                <a
+                  key={s.name}
+                  href={s.url}
+                  target={s.url.startsWith("mailto") ? undefined : "_blank"}
+                  rel="noopener noreferrer"
+                  className="flex justify-between items-center py-3 border-b border-border text-muted-foreground hover:text-foreground no-underline transition-colors duration-150 text-[13px]"
+                >
+                  <span className="flex items-center gap-2.5">
+                    <Icon size={15} aria-label={s.name} />
+                    <span className="sr-only">{s.name}</span>
+                  </span>
+                  <span>{s.handle}</span>
+                </a>
+              );
+            })}
           </div>
         </motion.div>
 

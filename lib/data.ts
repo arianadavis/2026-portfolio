@@ -1,3 +1,11 @@
+import type { ComponentType } from "react";
+import { SiInstagram, SiFigma, SiDribbble, SiX } from "react-icons/si";
+import { FaLinkedinIn } from "react-icons/fa6";
+import { Mail } from "lucide-react";
+
+// Both lucide-react and react-icons components accept these props.
+type IconComponent = ComponentType<{ className?: string; size?: number | string }>;
+
 export const projects = [
   {
     id: 'stocktwits-2',
@@ -127,13 +135,18 @@ export const experience = [
   },
 ];
 
-export const socials = [
-  { name: 'Instagram', handle: '@yourmobilegeek', url: 'https://instagram.com/yourmobilegeek' },
-  { name: 'LinkedIn', handle: '/in/arianamdavis', url: 'https://linkedin.com/in/arianamdavis' },
-  { name: 'Figma', handle: '@arianadavis', url: 'https://figma.com/@arianadavis' },
-  { name: 'Dribbble', handle: 'arianadavis', url: 'https://dribbble.com/arianadavis' },
-  { name: 'X', handle: '@yourmobilegeek', url: 'https://x.com/yourmobilegeek' },
-  { name: 'Email', handle: 'hello@arianadavis.com', url: 'mailto:hello@arianadavis.com' },
+export const socials: {
+  name: string;
+  handle: string;
+  url: string;
+  icon: IconComponent;
+}[] = [
+  { name: 'Instagram', handle: '@yourmobilegeek', url: 'https://instagram.com/yourmobilegeek', icon: SiInstagram },
+  { name: 'LinkedIn', handle: '/in/arianamdavis', url: 'https://linkedin.com/in/arianamdavis', icon: FaLinkedinIn },
+  { name: 'Figma', handle: '@arianadavis', url: 'https://figma.com/@arianadavis', icon: SiFigma },
+  { name: 'Dribbble', handle: 'arianadavis', url: 'https://dribbble.com/arianadavis', icon: SiDribbble },
+  { name: 'X', handle: '@yourmobilegeek', url: 'https://x.com/yourmobilegeek', icon: SiX },
+  { name: 'Email', handle: 'hello@arianadavis.com', url: 'mailto:hello@arianadavis.com', icon: Mail },
 ];
 
 export const specialties = [
