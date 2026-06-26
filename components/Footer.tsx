@@ -1,9 +1,10 @@
 "use client";
 
-import Link from "next/link";
 import { socials } from "@/lib/data";
 
 export default function Footer() {
+  const year = new Date().getFullYear();
+
   return (
     <footer className="border-t border-border px-8 py-10 mt-24">
       <div className="max-w-[1200px] mx-auto flex justify-between items-center flex-wrap gap-6">
@@ -22,7 +23,7 @@ export default function Footer() {
         </div>
 
         <span className="text-[12px] text-muted-foreground">
-          Ariana Davis ©2026
+          Ariana Davis ©{year}
         </span>
       </div>
     </footer>
