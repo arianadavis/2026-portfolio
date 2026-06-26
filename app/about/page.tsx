@@ -2,44 +2,26 @@
 
 import { motion } from "framer-motion";
 import Timeline from "@/components/Timeline";
+import { Separator } from "@/components/ui/separator";
 import { experience, socials } from "@/lib/data";
 
 export default function AboutPage() {
   return (
-    <div style={{ paddingTop: "120px" }}>
-      {/* Header */}
-      <section style={{ padding: "0 32px 80px", maxWidth: "1400px", margin: "0 auto" }}>
+    <div className="pt-[120px]">
+      <section className="px-8 pb-20 max-w-[1400px] mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 32 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          style={{
-            borderTop: "1px solid #1E1E1E",
-            paddingTop: "32px",
-            marginBottom: "64px",
-          }}
+          className="mb-16"
         >
-          <span
-            style={{
-              fontSize: "11px",
-              letterSpacing: "0.12em",
-              textTransform: "uppercase",
-              color: "#5A5A5A",
-              fontWeight: 400,
-            }}
-          >
+          <span className="text-[11px] tracking-[0.12em] uppercase text-muted-foreground font-normal">
             About
           </span>
+          <Separator className="mt-8" />
         </motion.div>
 
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: "80px",
-            alignItems: "start",
-          }}
-        >
+        <div className="grid grid-cols-2 gap-20 items-start">
           {/* Left: Name + Bio */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -47,84 +29,43 @@ export default function AboutPage() {
             transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           >
             <h1
-              style={{
-                fontFamily: "var(--font-playfair), 'Playfair Display', serif",
-                fontSize: "clamp(48px, 6vw, 88px)",
-                fontWeight: 500,
-                lineHeight: 0.95,
-                letterSpacing: "-0.03em",
-                color: "#EDEBE5",
-                margin: "0 0 40px",
-              }}
+              className="font-display font-medium leading-[0.95] tracking-[-0.03em] text-foreground mb-10"
+              style={{ fontSize: "clamp(48px, 6vw, 88px)" }}
             >
               Ariana
               <br />
-              <em style={{ fontStyle: "italic", color: "#C8A96E" }}>Davis</em>
+              <em className="text-primary" style={{ fontStyle: "italic" }}>
+                Davis
+              </em>
             </h1>
 
-            <p
-              style={{
-                fontSize: "16px",
-                lineHeight: 1.8,
-                color: "#EDEBE5",
-                maxWidth: "480px",
-                margin: "0 0 24px",
-                fontWeight: 300,
-              }}
-            >
+            <p className="text-base leading-[1.8] text-foreground max-w-[480px] mb-6 font-light">
               Senior product designer with 8+ years focused on complex,
               high-scale product. Experience at Apple and Google. Specializes
               in translating ambiguous problems into clear, scalable solutions.
             </p>
 
-            <p
-              style={{
-                fontSize: "15px",
-                lineHeight: 1.8,
-                color: "#5A5A5A",
-                maxWidth: "480px",
-                margin: "0 0 48px",
-                fontWeight: 300,
-              }}
-            >
+            <p className="text-[15px] leading-[1.8] text-muted-foreground max-w-[480px] mb-12 font-light">
               Based in Los Angeles, I work at the intersection of design and
               systems thinking — crafting experiences that feel inevitable in
               hindsight. My process centers on deep problem understanding, rapid
               iteration, and rigorous attention to detail at every scale.
             </p>
 
-            {/* Contacts */}
-            <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+            {/* Social links */}
+            <div className="flex flex-col">
               {socials.map((s) => (
                 <a
                   key={s.name}
                   href={s.url}
                   target={s.url.startsWith("mailto") ? undefined : "_blank"}
                   rel="noopener noreferrer"
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    fontSize: "13px",
-                    color: "#5A5A5A",
-                    textDecoration: "none",
-                    padding: "12px 0",
-                    borderBottom: "1px solid #1E1E1E",
-                    transition: "color 0.2s ease",
-                  }}
-                  onMouseEnter={(e) => {
-                    const el = e.currentTarget as HTMLAnchorElement;
-                    el.style.color = "#EDEBE5";
-                  }}
-                  onMouseLeave={(e) => {
-                    const el = e.currentTarget as HTMLAnchorElement;
-                    el.style.color = "#5A5A5A";
-                  }}
+                  className="flex justify-between items-center text-muted-foreground hover:text-foreground no-underline py-3 border-b border-border transition-colors duration-200"
                 >
-                  <span style={{ letterSpacing: "0.06em", textTransform: "uppercase", fontSize: "11px" }}>
+                  <span className="text-[11px] tracking-[0.06em] uppercase font-normal">
                     {s.name}
                   </span>
-                  <span style={{ fontSize: "13px" }}>{s.handle}</span>
+                  <span className="text-[13px]">{s.handle}</span>
                 </a>
               ))}
             </div>
@@ -136,19 +77,9 @@ export default function AboutPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           >
-            <h2
-              style={{
-                fontSize: "11px",
-                letterSpacing: "0.12em",
-                textTransform: "uppercase",
-                color: "#5A5A5A",
-                fontWeight: 400,
-                margin: "0 0 40px",
-              }}
-            >
+            <h2 className="text-[11px] tracking-[0.12em] uppercase text-muted-foreground font-normal mb-10">
               Experience
             </h2>
-
             <Timeline items={experience} />
           </motion.div>
         </div>

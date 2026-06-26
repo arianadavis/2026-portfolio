@@ -2,6 +2,8 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { Separator } from "@/components/ui/separator";
+import { Badge } from "@/components/ui/badge";
 import { projects } from "@/lib/data";
 import { notFound } from "next/navigation";
 import { use } from "react";
@@ -17,35 +19,22 @@ export default function ProjectDetailPage({ params }: PageProps) {
   if (!project) notFound();
 
   return (
-    <div style={{ paddingTop: "120px", minHeight: "100vh" }}>
-      <section style={{ padding: "0 32px 120px", maxWidth: "1400px", margin: "0 auto" }}>
+    <div className="pt-[120px] min-h-screen">
+      <section className="px-8 pb-32 max-w-[1400px] mx-auto">
         {/* Back link */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
-          style={{
-            borderTop: "1px solid #1E1E1E",
-            paddingTop: "32px",
-            marginBottom: "64px",
-          }}
+          className="mb-16"
         >
           <Link
             href="/"
-            style={{
-              fontSize: "11px",
-              letterSpacing: "0.12em",
-              textTransform: "uppercase",
-              color: "#5A5A5A",
-              textDecoration: "none",
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "8px",
-              transition: "color 0.2s ease",
-            }}
+            className="text-[11px] tracking-[0.12em] uppercase text-muted-foreground hover:text-foreground no-underline inline-flex items-center gap-2 transition-colors duration-200"
           >
             ← Back to Work
           </Link>
+          <Separator className="mt-8" />
         </motion.div>
 
         {/* Header */}
@@ -53,101 +42,53 @@ export default function ProjectDetailPage({ params }: PageProps) {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          style={{ marginBottom: "64px" }}
+          className="mb-16"
         >
           <span
-            style={{
-              fontSize: "12px",
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-              color: project.accentColor,
-              display: "block",
-              marginBottom: "16px",
-            }}
+            className="text-[12px] tracking-[0.1em] uppercase block mb-4 font-medium"
+            style={{ color: project.accentColor }}
           >
             {project.category} — {project.year}
           </span>
           <h1
-            style={{
-              fontFamily: "var(--font-playfair), 'Playfair Display', serif",
-              fontSize: "clamp(40px, 6vw, 88px)",
-              fontWeight: 500,
-              lineHeight: 0.95,
-              letterSpacing: "-0.03em",
-              color: "#EDEBE5",
-              margin: "0 0 32px",
-            }}
+            className="font-display font-medium leading-[0.95] tracking-[-0.03em] text-foreground mb-8"
+            style={{ fontSize: "clamp(40px, 6vw, 88px)" }}
           >
             {project.title}
           </h1>
-          <p
-            style={{
-              fontSize: "18px",
-              lineHeight: 1.7,
-              color: "#5A5A5A",
-              maxWidth: "600px",
-              fontWeight: 300,
-            }}
-          >
+          <p className="text-lg leading-[1.7] text-muted-foreground max-w-[600px] font-light">
             {project.description}
           </p>
         </motion.div>
 
-        {/* Hero image placeholder */}
+        {/* Hero placeholder */}
         <motion.div
           initial={{ opacity: 0, y: 32 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-          style={{
-            aspectRatio: "16/7",
-            borderRadius: "4px",
-            backgroundColor: "#141414",
-            border: "1px solid #1E1E1E",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            marginBottom: "80px",
-            position: "relative",
-            overflow: "hidden",
-          }}
+          className="relative aspect-[16/7] rounded-[4px] bg-card border border-border flex items-center justify-center mb-20 overflow-hidden"
         >
           <div
+            className="absolute inset-0"
             style={{
-              position: "absolute",
-              inset: 0,
               background: `radial-gradient(ellipse 50% 60% at 50% 50%, ${project.accentColor}18, transparent 70%)`,
             }}
           />
-          <p
-            style={{
-              fontSize: "12px",
-              letterSpacing: "0.12em",
-              textTransform: "uppercase",
-              color: "#3A3A3A",
-              position: "relative",
-            }}
-          >
+          <p className="text-[12px] tracking-[0.12em] uppercase text-muted-foreground/40 relative">
             Case Study Coming Soon
           </p>
         </motion.div>
 
         {/* Tags */}
-        <div style={{ display: "flex", gap: "8px", marginBottom: "48px" }}>
+        <div className="flex gap-2 flex-wrap">
           {project.tags.map((tag) => (
-            <span
+            <Badge
               key={tag}
-              style={{
-                padding: "6px 14px",
-                borderRadius: "2px",
-                border: "1px solid #1E1E1E",
-                fontSize: "11px",
-                letterSpacing: "0.08em",
-                textTransform: "uppercase",
-                color: "#5A5A5A",
-              }}
+              variant="outline"
+              className="text-[11px] tracking-[0.08em] uppercase text-muted-foreground border-border rounded-[2px] font-normal px-3 py-1.5"
             >
               {tag}
-            </span>
+            </Badge>
           ))}
         </div>
       </section>

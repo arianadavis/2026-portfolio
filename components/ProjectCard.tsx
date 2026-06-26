@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
 
 interface Project {
   id: string;
@@ -24,8 +25,6 @@ interface ProjectCardProps {
 }
 
 export default function ProjectCard({ project, index, featured = false }: ProjectCardProps) {
-  const [hovered, setHovered] = useState(false);
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 40 }}
@@ -35,138 +34,75 @@ export default function ProjectCard({ project, index, featured = false }: Projec
     >
       <Link
         href={`/projects/${project.id}`}
-        style={{ display: "block", textDecoration: "none" }}
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
+        className="block no-underline group"
       >
-        {/* Image/visual area */}
+        {/* Visual area */}
         <div
+          className={cn(
+            "relative overflow-hidden rounded-[4px] mb-5",
+            featured ? "aspect-video" : "aspect-[4/3]"
+          )}
           style={{
-            position: "relative",
-            aspectRatio: featured ? "16/9" : "4/3",
-            borderRadius: "4px",
-            overflow: "hidden",
-            marginBottom: "20px",
             background: `linear-gradient(135deg, ${project.gradientFrom}, ${project.gradientTo})`,
           }}
         >
-          {/* Dark overlay for depth */}
-          <div
-            style={{
-              position: "absolute",
-              inset: 0,
-              background: "linear-gradient(135deg, rgba(12,12,12,0) 0%, rgba(12,12,12,0.5) 100%)",
-            }}
-          />
+          {/* Dark overlay */}
+          <div className="absolute inset-0 bg-gradient-to-br from-transparent to-black/50" />
 
           {/* Glow orb */}
           <div
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl opacity-10 transition-all duration-500 group-hover:scale-150 group-hover:opacity-25"
             style={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: hovered
-                ? "translate(-50%, -50%) scale(1.5)"
-                : "translate(-50%, -50%) scale(1)",
               width: featured ? "120px" : "80px",
               height: featured ? "120px" : "80px",
-              borderRadius: "50%",
               backgroundColor: project.accentColor,
-              opacity: hovered ? 0.25 : 0.1,
-              filter: "blur(32px)",
-              transition: "transform 0.5s ease, opacity 0.5s ease",
             }}
           />
 
           {/* Hover CTA */}
-          <div
-            style={{
-              position: "absolute",
-              bottom: 0,
-              left: 0,
-              right: 0,
-              padding: "24px",
-              background: "linear-gradient(to top, rgba(12,12,12,0.85) 0%, transparent 100%)",
-              transform: hovered ? "translateY(0)" : "translateY(8px)",
-              opacity: hovered ? 1 : 0,
-              transition: "all 0.3s ease",
-            }}
-          >
+          <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/85 to-transparent translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
             <span
-              style={{
-                fontSize: "12px",
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-                color: project.accentColor,
-                fontWeight: 500,
-              }}
+              className="text-[12px] tracking-[0.1em] uppercase font-medium"
+              style={{ color: project.accentColor }}
             >
               View Case Study →
             </span>
           </div>
 
-          {/* Category tag */}
-          <div
-            style={{
-              position: "absolute",
-              top: "16px",
-              left: "16px",
-              padding: "4px 10px",
-              borderRadius: "2px",
-              backgroundColor: "rgba(12,12,12,0.65)",
-              backdropFilter: "blur(8px)",
-              fontSize: "10px",
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-              color: "#5A5A5A",
-              fontWeight: 500,
-            }}
-          >
-            {project.category}
+          {/* Category badge */}
+          <div className="absolute top-4 left-4">
+            <Badge
+              variant="secondary"
+              className="text-[10px] tracking-[0.1em] uppercase bg-background/65 backdrop-blur-sm text-muted-foreground border-0 rounded-[2px]"
+            >
+              {project.category}
+            </Badge>
           </div>
         </div>
 
         {/* Text info */}
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+        <div className="flex justify-between items-start">
           <div>
             <h3
-              style={{
-                fontFamily: "var(--font-playfair), 'Playfair Display', serif",
-                fontSize: featured ? "24px" : "18px",
-                fontWeight: 500,
-                color: hovered ? "#C8A96E" : "#EDEBE5",
-                margin: "0 0 6px",
-                letterSpacing: "-0.01em",
-                transition: "color 0.2s ease",
-              }}
+              className={cn(
+                "font-display font-medium text-foreground tracking-[-0.01em] mb-1.5 transition-colors duration-200 group-hover:text-primary",
+                featured ? "text-2xl" : "text-[18px]"
+              )}
             >
               {project.title}
             </h3>
-            <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
+            <div className="flex gap-2 flex-wrap">
               {project.tags.slice(0, 3).map((tag) => (
                 <span
                   key={tag}
-                  style={{
-                    fontSize: "11px",
-                    color: "#5A5A5A",
-                    letterSpacing: "0.05em",
-                  }}
+                  className="text-[11px] text-muted-foreground tracking-[0.05em]"
                 >
                   {tag}
                 </span>
               ))}
             </div>
           </div>
-          <span
-            style={{
-              fontSize: "12px",
-              color: "#5A5A5A",
-              fontWeight: 300,
-              flexShrink: 0,
-              marginLeft: "16px",
-              marginTop: "2px",
-            }}
-          >
+          <span className="text-xs text-muted-foreground font-light shrink-0 ml-4 mt-0.5">
             {project.year}
           </span>
         </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 interface TimelineItem {
   company: string;
@@ -16,20 +17,11 @@ interface TimelineProps {
 
 export default function Timeline({ items }: TimelineProps) {
   return (
-    <div style={{ position: "relative" }}>
+    <div className="relative">
       {/* Vertical line */}
-      <div
-        style={{
-          position: "absolute",
-          left: "0",
-          top: "8px",
-          bottom: "0",
-          width: "1px",
-          backgroundColor: "#1E1E1E",
-        }}
-      />
+      <div className="absolute left-0 top-2 bottom-0 w-px bg-border" />
 
-      <div style={{ display: "flex", flexDirection: "column", gap: "56px" }}>
+      <div className="flex flex-col gap-14">
         {items.map((item, i) => (
           <motion.div
             key={i}
@@ -37,71 +29,36 @@ export default function Timeline({ items }: TimelineProps) {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-40px" }}
             transition={{ duration: 0.6, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-            style={{
-              paddingLeft: "32px",
-              position: "relative",
-            }}
+            className="pl-8 relative"
           >
             {/* Dot */}
             <div
-              style={{
-                position: "absolute",
-                left: "-4px",
-                top: "8px",
-                width: "8px",
-                height: "8px",
-                borderRadius: "50%",
-                backgroundColor: i === 0 ? "#C8A96E" : "#2A2A2A",
-                border: "1px solid",
-                borderColor: i === 0 ? "#C8A96E" : "#3A3A3A",
-              }}
+              className={cn(
+                "absolute left-[-4px] top-2 w-2 h-2 rounded-full border",
+                i === 0
+                  ? "bg-primary border-primary"
+                  : "bg-secondary border-border"
+              )}
             />
 
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "8px", flexWrap: "wrap", gap: "8px" }}>
+            <div className="flex justify-between items-start mb-2 flex-wrap gap-2">
               <div>
-                <h3
-                  style={{
-                    fontFamily: "var(--font-playfair), 'Playfair Display', serif",
-                    fontSize: "20px",
-                    fontWeight: 500,
-                    color: "#EDEBE5",
-                    margin: "0 0 4px",
-                    letterSpacing: "-0.01em",
-                  }}
-                >
+                <h3 className="font-display text-xl font-medium text-foreground tracking-[-0.01em] mb-1">
                   {item.company}
                 </h3>
-                <p
-                  style={{
-                    fontSize: "14px",
-                    color: "#C8A96E",
-                    margin: 0,
-                    fontWeight: 400,
-                    letterSpacing: "0.02em",
-                  }}
-                >
+                <p className="text-sm text-primary font-normal tracking-[0.02em]">
                   {item.role}
                 </p>
               </div>
-              <div style={{ textAlign: "right" }}>
-                <p style={{ fontSize: "12px", color: "#5A5A5A", margin: "0 0 2px", letterSpacing: "0.05em" }}>
+              <div className="text-right">
+                <p className="text-xs text-muted-foreground mb-0.5 tracking-[0.05em]">
                   {item.period}
                 </p>
-                <p style={{ fontSize: "12px", color: "#3A3A3A", margin: 0 }}>
-                  {item.location}
-                </p>
+                <p className="text-xs text-muted-foreground/50">{item.location}</p>
               </div>
             </div>
 
-            <p
-              style={{
-                fontSize: "14px",
-                color: "#5A5A5A",
-                lineHeight: 1.7,
-                margin: "12px 0 0",
-                maxWidth: "480px",
-              }}
-            >
+            <p className="text-sm text-muted-foreground leading-[1.7] mt-3 max-w-[480px]">
               {item.description}
             </p>
           </motion.div>

@@ -3,6 +3,7 @@ import { Playfair_Display, DM_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { cn } from "@/lib/utils";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
@@ -34,11 +35,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${playfair.variable} ${dmSans.variable}`}>
-      <body
-        style={{ fontFamily: "var(--font-dm-sans), 'DM Sans', system-ui, sans-serif" }}
-        className="min-h-screen flex flex-col"
-      >
+    <html lang="en" className={cn(playfair.variable, dmSans.variable)}>
+      <body className="min-h-screen flex flex-col">
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />

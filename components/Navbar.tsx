@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
+import { cn } from "@/lib/utils";
 
 const navLinks = [
   { href: "/", label: "Work" },
@@ -22,51 +23,31 @@ export default function Navbar() {
 
   return (
     <nav
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 50,
-        padding: "20px 32px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        transition: "background 0.3s ease, border-color 0.3s ease",
-        background: scrolled ? "rgba(12,12,12,0.92)" : "transparent",
-        backdropFilter: scrolled ? "blur(12px)" : "none",
-        borderBottom: scrolled ? "1px solid #1E1E1E" : "1px solid transparent",
-      }}
+      className={cn(
+        "fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-5 transition-all duration-300",
+        scrolled
+          ? "bg-background/90 backdrop-blur-xl border-b border-border"
+          : "bg-transparent border-b border-transparent"
+      )}
     >
       <Link
         href="/"
-        style={{
-          fontFamily: "var(--font-playfair), 'Playfair Display', serif",
-          fontSize: "18px",
-          fontWeight: 600,
-          color: "#EDEBE5",
-          textDecoration: "none",
-          letterSpacing: "-0.01em",
-        }}
+        className="font-display text-[18px] font-semibold text-foreground tracking-[-0.01em] no-underline"
       >
         AD
       </Link>
 
-      <div style={{ display: "flex", alignItems: "center", gap: "32px" }}>
+      <div className="flex items-center gap-8">
         {navLinks.map((link) => (
           <Link
             key={link.href}
             href={link.href}
-            style={{
-              fontSize: "13px",
-              fontWeight: 400,
-              letterSpacing: "0.08em",
-              textTransform: "uppercase",
-              color:
-                pathname === link.href ? "#EDEBE5" : "#5A5A5A",
-              textDecoration: "none",
-              transition: "color 0.2s ease",
-            }}
+            className={cn(
+              "text-[13px] font-normal tracking-[0.08em] uppercase no-underline transition-colors duration-200",
+              pathname === link.href
+                ? "text-foreground"
+                : "text-muted-foreground hover:text-foreground"
+            )}
           >
             {link.label}
           </Link>

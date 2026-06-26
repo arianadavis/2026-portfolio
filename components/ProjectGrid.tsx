@@ -1,4 +1,5 @@
 import ProjectCard from "@/components/ProjectCard";
+import { Separator } from "@/components/ui/separator";
 
 interface Project {
   id: string;
@@ -22,50 +23,22 @@ export default function ProjectGrid({ projects }: ProjectGridProps) {
   const rest = projects.filter((p) => !p.featured);
 
   return (
-    <section
-      style={{
-        padding: "80px 32px 120px",
-        maxWidth: "1400px",
-        margin: "0 auto",
-      }}
-    >
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "baseline",
-          marginBottom: "48px",
-          borderTop: "1px solid #1E1E1E",
-          paddingTop: "32px",
-        }}
-      >
-        <h2
-          style={{
-            fontSize: "11px",
-            letterSpacing: "0.12em",
-            textTransform: "uppercase",
-            color: "#5A5A5A",
-            fontWeight: 400,
-            margin: 0,
-          }}
-        >
+    <section className="px-8 pt-20 pb-32 max-w-[1400px] mx-auto">
+      <div className="flex justify-between items-baseline mb-12">
+        <Separator className="hidden" />
+        <h2 className="text-[11px] tracking-[0.12em] uppercase text-muted-foreground font-normal">
           Selected Work
         </h2>
-        <span style={{ fontSize: "11px", color: "#5A5A5A" }}>
+        <span className="text-[11px] text-muted-foreground">
           {projects.length} Projects
         </span>
       </div>
 
-      {/* Featured row */}
+      <Separator className="mb-12" />
+
+      {/* Featured 2-col row */}
       {featured.length > 0 && (
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(2, 1fr)",
-            gap: "24px",
-            marginBottom: "24px",
-          }}
-        >
+        <div className="grid grid-cols-2 gap-6 mb-6">
           {featured.map((project, i) => (
             <ProjectCard key={project.id} project={project} index={i} featured />
           ))}
@@ -73,13 +46,7 @@ export default function ProjectGrid({ projects }: ProjectGridProps) {
       )}
 
       {/* Rest in 3-col grid */}
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(3, 1fr)",
-          gap: "24px",
-        }}
-      >
+      <div className="grid grid-cols-3 gap-6">
         {rest.map((project, i) => (
           <ProjectCard
             key={project.id}
