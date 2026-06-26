@@ -3,49 +3,33 @@
 import { motion } from "framer-motion";
 import { Separator } from "@/components/ui/separator";
 import { projects } from "@/lib/data";
-import ProjectCard from "@/components/ProjectCard";
+import ProjectCarousel from "@/components/ProjectCarousel";
 
 export default function ProjectsPage() {
   return (
-    <div className="pt-[120px]">
-      <section className="px-8 pb-32 max-w-[1400px] mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 32 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-16"
+    <div className="pt-28 pb-24">
+      <div className="px-8 max-w-[1200px] mx-auto mb-12">
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          className="text-[11px] tracking-[0.12em] uppercase text-muted-foreground mb-3"
         >
-          <div className="flex justify-between items-baseline mb-8">
-            <span className="text-[11px] tracking-[0.12em] uppercase text-muted-foreground font-normal">
-              All Work
-            </span>
-            <span className="text-[11px] text-muted-foreground">
-              {projects.length} Projects
-            </span>
-          </div>
-          <Separator />
-        </motion.div>
-
+          All Work
+        </motion.p>
+        <Separator className="mb-10" />
         <motion.h1
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="font-display font-medium leading-none tracking-[-0.02em] text-foreground mb-20"
-          style={{ fontSize: "clamp(40px, 5vw, 72px)" }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="text-[clamp(32px,5vw,60px)] leading-[1.05] tracking-[-0.03em] mb-2"
         >
-          Selected
-          <br />
-          <em className="text-primary" style={{ fontStyle: "italic" }}>
-            Projects
-          </em>
+          <span className="font-extralight">Selected </span>
+          <span className="font-bold">Projects</span>
         </motion.h1>
+      </div>
 
-        <div className="grid grid-cols-3 gap-8">
-          {projects.map((project, i) => (
-            <ProjectCard key={project.id} project={project} index={i} />
-          ))}
-        </div>
-      </section>
+      <ProjectCarousel projects={projects} />
     </div>
   );
 }

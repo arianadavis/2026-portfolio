@@ -1,71 +1,59 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { specialties } from "@/lib/data";
 
 export default function Hero() {
   return (
-    <section className="min-h-screen flex flex-col justify-end px-8 pb-16 relative overflow-hidden">
-      {/* Background radial glow */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_20%,rgba(200,169,110,0.05)_0%,transparent_60%)] pointer-events-none" />
-
-      {/* Year badge */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8, delay: 0.2 }}
-        className="absolute top-28 right-8 text-[11px] tracking-[0.12em] uppercase text-muted-foreground"
+    <section className="pt-32 pb-0 px-8 max-w-[1200px] mx-auto">
+      {/* Big mixed-weight headline */}
+      <motion.h1
+        initial={{ opacity: 0, y: 32 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        className="text-[clamp(36px,6.5vw,76px)] leading-[1.08] tracking-[-0.03em] mb-6"
       >
-        ©2026
-      </motion.div>
+        <span className="font-extralight text-foreground">
+          Clarity is my superpower.{" "}
+        </span>
+        <span className="font-bold text-foreground">
+          I design high-scale products
+        </span>
+        <span className="font-extralight text-foreground">
+          {" "}at Apple & Google that just work.
+        </span>
+      </motion.h1>
 
-      {/* Location */}
+      {/* Tagline + specialty tags */}
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8, delay: 0.3 }}
-        className="absolute top-[130px] left-8 text-[11px] tracking-[0.12em] uppercase text-muted-foreground"
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+        className="flex items-center gap-5 flex-wrap"
       >
-        Los Angeles, CA
+        <p className="text-[14px] text-muted-foreground">
+          8+ years translating complex problems into scalable solutions.
+        </p>
+
+        {/* Divider */}
+        <div className="hidden sm:block h-4 w-px bg-border" />
+
+        {/* Specialty tag pills */}
+        <div className="flex items-center gap-2 flex-wrap">
+          {specialties.map((s) => (
+            <span
+              key={s.label}
+              className="inline-flex items-center gap-1.5 text-[13px] text-foreground/70 border border-border rounded-full px-3 py-1 hover:border-foreground/20 transition-colors duration-150"
+            >
+              <span
+                className="w-1.5 h-1.5 rounded-full shrink-0"
+                style={{ backgroundColor: s.color }}
+              />
+              {s.label}
+            </span>
+          ))}
+        </div>
       </motion.div>
-
-      {/* Main heading */}
-      <div className="max-w-[1400px] w-full">
-        <motion.h1
-          initial={{ opacity: 0, y: 48 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-          className="font-display font-medium leading-[0.9] tracking-[-0.03em] text-foreground mb-6"
-          style={{ fontSize: "clamp(64px, 12vw, 180px)" }}
-        >
-          Ariana
-          <br />
-          <em className="italic text-primary not-italic" style={{ fontStyle: "italic" }}>
-            Davis
-          </em>
-        </motion.h1>
-
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          className="flex items-end justify-between gap-8 flex-wrap"
-        >
-          <p
-            className="text-muted-foreground font-light leading-relaxed max-w-[480px] m-0"
-            style={{ fontSize: "clamp(14px, 1.8vw, 18px)" }}
-          >
-            Senior product designer with 8+ years focused on complex,
-            high-scale product. Experience at Apple and Google.
-          </p>
-
-          <div className="flex items-center gap-2 text-muted-foreground text-[12px] tracking-[0.08em] uppercase shrink-0">
-            <span>Scroll</span>
-            <svg width="32" height="1" viewBox="0 0 32 1" fill="none">
-              <line x1="0" y1="0.5" x2="32" y2="0.5" stroke="currentColor" />
-            </svg>
-          </div>
-        </motion.div>
-      </div>
     </section>
   );
 }

@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
-  { href: "/", label: "Work" },
+  { href: "/", label: "Works" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];
@@ -16,7 +16,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
+    const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -24,28 +24,30 @@ export default function Navbar() {
   return (
     <nav
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-5 transition-all duration-300",
+        "fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 h-14 transition-all duration-300",
         scrolled
-          ? "bg-background/90 backdrop-blur-xl border-b border-border"
-          : "bg-transparent border-b border-transparent"
+          ? "bg-background/95 backdrop-blur-sm border-b border-border"
+          : "bg-transparent"
       )}
     >
+      {/* Logo */}
       <Link
         href="/"
-        className="font-display text-[18px] font-semibold text-foreground tracking-[-0.01em] no-underline"
+        className="text-[13px] font-bold tracking-[0.06em] uppercase text-foreground no-underline"
       >
-        AD
+        Ariana Davis
       </Link>
 
-      <div className="flex items-center gap-8">
+      {/* Center nav */}
+      <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-7">
         {navLinks.map((link) => (
           <Link
             key={link.href}
             href={link.href}
             className={cn(
-              "text-[13px] font-normal tracking-[0.08em] uppercase no-underline transition-colors duration-200",
+              "text-[14px] no-underline transition-colors duration-150",
               pathname === link.href
-                ? "text-foreground"
+                ? "text-foreground font-medium"
                 : "text-muted-foreground hover:text-foreground"
             )}
           >
@@ -53,6 +55,14 @@ export default function Navbar() {
           </Link>
         ))}
       </div>
+
+      {/* Right CTA */}
+      <a
+        href="mailto:hello@arianadavis.com"
+        className="inline-flex items-center h-8 px-4 rounded-full bg-foreground text-background text-[13px] font-medium no-underline hover:opacity-80 transition-opacity duration-150"
+      >
+        Contact me
+      </a>
     </nav>
   );
 }

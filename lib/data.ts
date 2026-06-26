@@ -136,6 +136,17 @@ export const socials = [
   { name: 'Email', handle: 'hello@arianadavis.com', url: 'mailto:hello@arianadavis.com' },
 ];
 
+export const specialties = [
+  { label: 'Product Design', color: '#3B6FD4' },
+  { label: 'Design Systems', color: '#7C5DE0' },
+  { label: 'Apple', color: '#888888' },
+  { label: 'Google', color: '#EA4335' },
+  { label: 'iOS', color: '#007AFF' },
+  { label: 'Web', color: '#F59E0B' },
+  { label: 'UX Research', color: '#2DB87B' },
+  { label: 'Interaction Design', color: '#E0792D' },
+];
+
 export const marqueeItems = [
   'Product Design',
   'Design Systems',
