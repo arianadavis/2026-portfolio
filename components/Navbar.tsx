@@ -74,7 +74,7 @@ export default function Navbar() {
             href="mailto:hello@arianadavis.com"
             className="hidden sm:inline-flex items-center h-8 px-4 rounded-full bg-foreground text-background text-[13px] font-medium no-underline hover:opacity-80 transition-opacity duration-150"
           >
-            Contact me
+            Say Hi 👋
           </a>
 
           {/* Hamburger — mobile only */}
@@ -115,7 +115,7 @@ export default function Navbar() {
             href="mailto:hello@arianadavis.com"
             className="mt-4 inline-flex items-center justify-center h-10 px-4 rounded-full bg-foreground text-background text-[14px] font-medium no-underline"
           >
-            Contact me
+            Say Hi 👋
           </a>
         </div>
       </div>
