@@ -80,8 +80,8 @@ export default function ContactPage() {
                     className="flex justify-between items-center py-3.5 border-b border-border text-muted-foreground hover:text-foreground no-underline text-[13px] transition-colors duration-150"
                   >
                     <span className="flex items-center gap-2.5">
-                      <Icon size={15} aria-label={social.name} />
-                      <span className="sr-only">{social.name}</span>
+                      <Icon size={15} aria-hidden />
+                      <span>{social.name}</span>
                     </span>
                     <span>{social.handle} →</span>
                   </a>

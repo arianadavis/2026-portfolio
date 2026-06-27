@@ -35,8 +35,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={cn(geist.variable, geistMono.variable)}>
-      <body className="min-h-screen flex flex-col">
+    <html lang="en" className={cn(geist.variable, geistMono.variable)} suppressHydrationWarning>
+      <body className="min-h-screen flex flex-col" suppressHydrationWarning>
         <ThemeProvider>
           <Navbar />
           <main className="flex-1">{children}</main>

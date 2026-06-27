@@ -56,8 +56,8 @@ export default function AboutPage() {
                   className="flex justify-between items-center py-3 border-b border-border text-muted-foreground hover:text-foreground no-underline transition-colors duration-150 text-[13px]"
                 >
                   <span className="flex items-center gap-2.5">
-                    <Icon size={15} aria-label={s.name} />
-                    <span className="sr-only">{s.name}</span>
+                    <Icon size={15} aria-hidden />
+                    <span>{s.name}</span>
                   </span>
                   <span>{s.handle}</span>
                 </a>

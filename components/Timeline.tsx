@@ -48,7 +48,7 @@ export default function Timeline({ items }: TimelineProps) {
               </div>
               <div className="text-right shrink-0">
                 <p className="text-[12px] text-muted-foreground">{item.period}</p>
-                <p className="text-[11px] text-border">{item.location}</p>
+                <p className="text-[11px] text-muted-foreground/50">{item.location}</p>
               </div>
             </div>
 

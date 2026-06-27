@@ -193,14 +193,13 @@ export default function ProjectCarousel({ projects }: ProjectCarouselProps) {
 
           <div
             ref={scrollRef}
-            className="flex gap-5 overflow-x-auto pb-6 px-5 sm:px-8"
+            className="flex gap-5 overflow-x-auto pb-6 px-5 sm:px-8 [&::-webkit-scrollbar]:hidden"
             style={{
               scrollSnapType: "x mandatory",
               scrollbarWidth: "none",
               msOverflowStyle: "none",
             }}
           >
-            <style>{`.no-scrollbar::-webkit-scrollbar { display: none; }`}</style>
             {projects.map((project, i) => (
               <CarouselCard key={project.id} project={project} index={i} />
             ))}
