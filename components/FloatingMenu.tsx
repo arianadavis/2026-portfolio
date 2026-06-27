@@ -44,46 +44,52 @@ export default function FloatingMenu() {
     };
   }, [calOpen, closeCal]);
 
+  const pill = (
+    <div className="flex items-center gap-1 rounded-full bg-[#0a0a0a] border border-white/10 p-1.5 pl-3 shadow-[0_8px_30px_rgba(0,0,0,0.35)]">
+      {primarySocials.map((social) => {
+        const Icon = social.icon;
+        const isMailto = social.url.startsWith("mailto");
+        return (
+          <a
+            key={social.name}
+            href={social.url}
+            target={isMailto ? undefined : "_blank"}
+            rel="noopener noreferrer"
+            aria-label={social.name}
+            title={social.name}
+            className="w-9 h-9 flex items-center justify-center rounded-full text-white/70 hover:text-white hover:bg-white/10 transition-colors duration-150"
+          >
+            <Icon size={16} />
+          </a>
+        );
+      })}
+      <span className="w-px h-5 bg-white/15 mx-1.5" />
+      <button
+        onClick={() => setCalOpen(true)}
+        className="flex items-center h-9 px-5 rounded-full bg-white text-black text-[11px] md:text-[13px] font-medium whitespace-nowrap hover:bg-white/90 transition-colors duration-150"
+      >
+        Book a call
+      </button>
+    </div>
+  );
+
   return (
     <>
-      {/* Floating pill — desktop only */}
+      {/* Mobile: always visible */}
+      <div className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
+        {pill}
+      </div>
+
+      {/* Desktop: scroll-triggered */}
       <div
         className={cn(
-          "fixed bottom-6 left-1/2 -translate-x-1/2 z-50 hidden md:block transition-all duration-300 ease-out",
+          "hidden md:block fixed bottom-6 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 ease-out",
           visible
             ? "opacity-100 translate-y-0"
             : "opacity-0 translate-y-4 pointer-events-none"
         )}
       >
-        <div className="flex items-center gap-1 rounded-full bg-[#0a0a0a] border border-white/10 p-1.5 pl-3 shadow-[0_8px_30px_rgba(0,0,0,0.35)]">
-          {primarySocials.map((social) => {
-            const Icon = social.icon;
-            const isMailto = social.url.startsWith("mailto");
-            return (
-              <a
-                key={social.name}
-                href={social.url}
-                target={isMailto ? undefined : "_blank"}
-                rel="noopener noreferrer"
-                aria-label={social.name}
-                title={social.name}
-                className="w-9 h-9 flex items-center justify-center rounded-full text-white/70 hover:text-white hover:bg-white/10 transition-colors duration-150"
-              >
-                <Icon size={16} />
-              </a>
-            );
-          })}
-
-          {/* Divider */}
-          <span className="w-px h-5 bg-white/15 mx-1.5" />
-
-          <button
-            onClick={() => setCalOpen(true)}
-            className="flex items-center h-9 px-5 rounded-full bg-white text-black text-[13px] font-medium hover:bg-white/90 transition-colors duration-150"
-          >
-            Book a call
-          </button>
-        </div>
+        {pill}
       </div>
 
       {/* Calendar overlay */}

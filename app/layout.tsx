@@ -39,7 +39,7 @@ export default function RootLayout({
       <body className="min-h-screen flex flex-col" suppressHydrationWarning>
         <ThemeProvider>
           <Navbar />
-          <main className="flex-1">{children}</main>
+          <main className="flex-1 pb-28 md:pb-0">{children}</main>
           <Footer />
           <FloatingMenu />
         </ThemeProvider>

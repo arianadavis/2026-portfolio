@@ -93,30 +93,48 @@ export default function Navbar() {
       <div
         className={cn(
           "md:hidden overflow-hidden transition-[max-height,opacity] duration-300 ease-out",
-          menuOpen ? "max-h-72 opacity-100" : "max-h-0 opacity-0"
+          menuOpen ? "max-h-96 opacity-100 pointer-events-auto" : "max-h-0 opacity-0 pointer-events-none"
         )}
       >
-        <div className="px-5 pb-4 pt-1 flex flex-col">
+        <div className="px-5 pb-6 pt-2 flex flex-col">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
               className={cn(
-                "py-3 border-b border-border text-[15px] no-underline transition-colors duration-150",
+                "py-3.5 text-[16px] no-underline transition-colors duration-150",
                 pathname === link.href
                   ? "text-foreground font-medium"
-                  : "text-muted-foreground hover:text-foreground"
+                  : "text-foreground"
               )}
             >
               {link.label}
             </Link>
           ))}
-          <a
-            href="mailto:hello@arianadavis.com"
-            className="mt-4 inline-flex items-center justify-center h-10 px-4 rounded-full bg-foreground text-background text-[14px] font-medium no-underline"
-          >
-            Say Hi 👋
-          </a>
+
+          {/* Theme toggle row */}
+          <div className="flex items-center justify-between py-3.5">
+            <span className="text-[16px] text-foreground">Appearance</span>
+            <ThemeToggle />
+          </div>
+
+          {/* CTA buttons */}
+          <div className="flex gap-3 mt-6">
+            <a
+              href="mailto:hello@arianadavis.com"
+              className="flex-1 inline-flex items-center justify-center h-14 rounded-full bg-foreground text-background text-[15px] font-medium no-underline"
+            >
+              Say Hi 👋
+            </a>
+            <a
+              href="https://linkedin.com/in/arianamdavis"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 inline-flex items-center justify-center h-14 rounded-full border border-border text-foreground text-[15px] font-medium no-underline"
+            >
+              LinkedIn&nbsp;↗
+            </a>
+          </div>
         </div>
       </div>
     </nav>

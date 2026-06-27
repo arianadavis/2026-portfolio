@@ -22,6 +22,56 @@ interface ProjectCarouselProps {
   projects: Project[];
 }
 
+function MobileProjectCard({ project, index }: { project: Project; index: number }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: index * 0.05 }}
+    >
+      <Link href={`/projects/${project.id}`} className="block no-underline group">
+        <div
+          className="relative aspect-[16/10] rounded-2xl overflow-hidden mb-4"
+          style={{
+            background: `linear-gradient(135deg, ${project.gradientFrom}, ${project.gradientTo})`,
+          }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-br from-black/0 to-black/30" />
+          <div
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full blur-[60px]"
+            style={{
+              width: 180,
+              height: 180,
+              backgroundColor: project.accentColor,
+              opacity: 0.2,
+            }}
+          />
+          <div className="absolute top-3 left-3">
+            <Badge
+              variant="secondary"
+              className="text-[10px] tracking-wide uppercase bg-white/80 backdrop-blur-sm text-foreground/60 border-0 rounded-full font-normal px-2.5"
+            >
+              {project.category}
+            </Badge>
+          </div>
+        </div>
+        <div className="flex items-start justify-between gap-3 px-1">
+          <div className="flex-1 min-w-0">
+            <h3 className="text-[16px] font-medium text-foreground mb-1.5 leading-snug">
+              {project.title}
+            </h3>
+            <p className="text-[13px] text-muted-foreground leading-relaxed">
+              {project.description}
+            </p>
+          </div>
+          <span className="text-[16px] text-muted-foreground shrink-0 mt-0.5">↗</span>
+        </div>
+      </Link>
+    </motion.div>
+  );
+}
+
 function CarouselCard({ project, index }: { project: Project; index: number }) {
   const [hovered, setHovered] = useState(false);
 
@@ -184,60 +234,65 @@ export default function ProjectCarousel({ projects }: ProjectCarouselProps) {
         <span className="text-[11px] text-muted-foreground">{projects.length} projects</span>
       </div>
 
-      {mode === "scroll" ? (
-        <div className="relative">
-          {/* Left fade */}
-          <div className="absolute left-0 inset-y-0 w-20 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
-          {/* Right fade */}
-          <div className="absolute right-0 inset-y-0 w-20 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+      {/* Mobile: vertical stacked list */}
+      <div className="md:hidden px-5 flex flex-col gap-10">
+        {projects.map((project, i) => (
+          <MobileProjectCard key={project.id} project={project} index={i} />
+        ))}
+      </div>
 
-          <div
-            ref={scrollRef}
-            className="flex gap-5 overflow-x-auto pb-6 px-5 sm:px-8 [&::-webkit-scrollbar]:hidden"
-            style={{
-              scrollSnapType: "x mandatory",
-              scrollbarWidth: "none",
-              msOverflowStyle: "none",
-            }}
-          >
-            {projects.map((project, i) => (
-              <CarouselCard key={project.id} project={project} index={i} />
-            ))}
-            {/* Trailing spacer */}
-            <div className="shrink-0 w-4" />
+      {/* Desktop: carousel / grid */}
+      <div className="hidden md:block">
+        {mode === "scroll" ? (
+          <div className="relative">
+            <div className="absolute left-0 inset-y-0 w-20 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 inset-y-0 w-20 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+            <div
+              ref={scrollRef}
+              className="flex gap-5 overflow-x-auto pb-6 px-5 sm:px-8 [&::-webkit-scrollbar]:hidden"
+              style={{
+                scrollSnapType: "x mandatory",
+                scrollbarWidth: "none",
+                msOverflowStyle: "none",
+              }}
+            >
+              {projects.map((project, i) => (
+                <CarouselCard key={project.id} project={project} index={i} />
+              ))}
+              <div className="shrink-0 w-4" />
+            </div>
           </div>
-        </div>
-      ) : (
-        <div className="px-5 sm:px-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-[1200px] mx-auto">
-          {projects.map((project, i) => (
-            <GridCard key={project.id} project={project} index={i} />
-          ))}
-        </div>
-      )}
+        ) : (
+          <div className="px-5 sm:px-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-[1200px] mx-auto">
+            {projects.map((project, i) => (
+              <GridCard key={project.id} project={project} index={i} />
+            ))}
+          </div>
+        )}
 
-      {/* Floating toggle */}
-      <div className="flex justify-center mt-8">
-        <div className="inline-flex items-center bg-foreground rounded-full p-1 gap-0.5">
-          <button
-            onClick={() => setMode("scroll")}
-            className={`px-4 py-1.5 rounded-full text-[12px] font-medium transition-all duration-200 ${
-              mode === "scroll"
-                ? "bg-background text-foreground"
-                : "text-background/60 hover:text-background"
-            }`}
-          >
-            Scroll
-          </button>
-          <button
-            onClick={() => setMode("grid")}
-            className={`px-4 py-1.5 rounded-full text-[12px] font-medium transition-all duration-200 ${
-              mode === "grid"
-                ? "bg-background text-foreground"
-                : "text-background/60 hover:text-background"
-            }`}
-          >
-            Grid
-          </button>
+        <div className="flex justify-center mt-8">
+          <div className="inline-flex items-center bg-foreground rounded-full p-1 gap-0.5">
+            <button
+              onClick={() => setMode("scroll")}
+              className={`px-4 py-1.5 rounded-full text-[12px] font-medium transition-all duration-200 ${
+                mode === "scroll"
+                  ? "bg-background text-foreground"
+                  : "text-background/60 hover:text-background"
+              }`}
+            >
+              Scroll
+            </button>
+            <button
+              onClick={() => setMode("grid")}
+              className={`px-4 py-1.5 rounded-full text-[12px] font-medium transition-all duration-200 ${
+                mode === "grid"
+                  ? "bg-background text-foreground"
+                  : "text-background/60 hover:text-background"
+              }`}
+            >
+              Grid
+            </button>
+          </div>
         </div>
       </div>
     </section>
