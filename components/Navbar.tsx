@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
 const navLinks = [
-  { href: "/", label: "Works" },
+  { href: "/", label: "Projects" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];
@@ -72,7 +72,7 @@ export default function Navbar() {
           {/* CTA — hidden on the smallest screens */}
           <a
             href="mailto:hello@arianadavis.com"
-            className="hidden sm:inline-flex items-center h-7 px-3.5 rounded-full bg-foreground text-background text-[11px] font-medium no-underline hover:opacity-80 transition-opacity duration-150"
+            className="hidden sm:inline-flex items-center h-9 px-4.5 rounded-full bg-foreground text-background text-[13px] font-semibold no-underline hover:opacity-80 transition-opacity duration-150"
           >
             Say Hi 👋
           </a>

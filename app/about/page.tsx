@@ -1,13 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { socials, experience } from "@/lib/data";
+import { experience } from "@/lib/data";
 import Timeline from "@/components/Timeline";
 
 const status = [
   { label: "Currently", value: "Senior Product Designer at Apple" },
   { label: "Previously", value: "Google · Stocktwits · Golden State Warriors" },
-  { label: "Education", value: "Add your school here" },
+  { label: "Education", value: "Florida State University" },
 ];
 
 const interests = [
@@ -20,10 +20,6 @@ const interests = [
   "Photography",
   "Running",
 ];
-
-const aboutSocials = ["LinkedIn", "Email", "Figma"]
-  .map((name) => socials.find((s) => s.name === name))
-  .filter((s): s is (typeof socials)[number] => Boolean(s));
 
 const fadeUp = {
   initial: { opacity: 0, y: 16 },
@@ -147,37 +143,6 @@ export default function AboutPage() {
         Outside of work you&apos;ll find me chasing good coffee, long runs, and
         the occasional design rabbit hole. Balance keeps everything sharp.
       </motion.p>
-
-      {/* Socials footer */}
-      <motion.div
-        {...fadeUp}
-        transition={{ duration: 0.6, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
-        className="mt-20 pt-8 border-t border-border flex flex-col items-center gap-5 text-center"
-      >
-        <p className="text-[13px] text-muted-foreground">
-          Los Angeles, CA · Senior Product Designer
-        </p>
-
-        <div className="flex flex-wrap justify-center items-center gap-x-7 gap-y-3">
-          {aboutSocials.map((s) => {
-            const Icon = s.icon;
-            return (
-              <a
-                key={s.name}
-                href={s.url}
-                target={s.url.startsWith("mailto") ? undefined : "_blank"}
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors duration-150"
-              >
-                <Icon size={15} />
-                <span className="text-[13px]">{s.name}</span>
-              </a>
-            );
-          })}
-        </div>
-
-        <p className="text-[12px] text-muted-foreground/60">© 2026</p>
-      </motion.div>
 
     </div>
   );
